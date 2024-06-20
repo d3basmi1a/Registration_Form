@@ -60,11 +60,19 @@ app.post('/register', async (req, res) => {
 
         // Save the user to the database
         const user = await newUser.save();
-        res.sendFile(__dirname + "/public/signup_successful.html");
+        
+        // Redirect to success page
+        res.redirect('/signup_successful.html');
+        
     } catch (err) {
         console.error('Error saving user:', err);
         res.status(500).send('Error registering user');
     }
+});
+
+// Serve index.html or other static files
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 // Start the server
